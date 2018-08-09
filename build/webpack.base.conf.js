@@ -3,6 +3,7 @@ const path = require('path')
 const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
+const webpack = require('webpack')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -23,13 +24,20 @@ module.exports = {
       : config.dev.assetsPublicPath
   },
   resolve: {
-  extensions: ['.js', '.vue', '.json'],
-  alias: {
-    'vue$': 'vue/dist/vue.esm.js',
-    '@': resolve('src'),
-    'common': resolve('src/common')
-  }
-},
+    extensions: ['.js', '.vue', '.json'],
+    alias: {
+      'vue$': 'vue/dist/vue.esm.js',
+      '@': resolve('src'),
+      'common': resolve('src/common')
+    }
+  },
+  plugins: [
+    new webpack.optimize.CommonsChunkPlugin('common.js'),
+    new webpack.ProvidePlugin({
+      jQuery: "jquery",
+      $: "jquery"
+    })
+  ],
   module: {
     rules: [
       {
@@ -81,3 +89,5 @@ module.exports = {
     child_process: 'empty'
   }
 }
+
+

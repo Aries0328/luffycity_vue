@@ -1,23 +1,28 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import HelloWorld from '@/components/HelloWorld'
 import Course from '@/components/Course'
-import Index from '@/components/Index'
+import ShoppingCart from '@/components/ShoppingCart'
 
-Vue.use(Router)
 
+Vue.use(Router);
 export default new Router({
-  mode:'history',
   routes: [
     {
-
       path: '/',
-      name: '主页',
-      component: Index
+      name: 'HelloWorld',
+      component: HelloWorld
     },
     {
       path:'/course',
-      name:'课程',
-      component:Course
-    }
-  ],
+      name: 'course',
+      component: Course
+    },
+     {
+      path:'/shopping',
+      name: 'shopping',
+      component: ShoppingCart
+    },
+
+  ]
 })
